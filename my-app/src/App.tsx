@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import SubmitProblem from './SubmitProblem';
 
-function App() {
+interface Problem {
+  id: number;
+  description: string;
+}
+
+const App: React.FC = () => {
+  const [problems, setProblems] = useState<Problem[]>([]);
+
+  useEffect(() => {
+    fetchProblems();
+  }, []);
+
+  const fetchProblems = async () => {
+    try {
+      const response = await axios.get('/api/problems');
+      setProblems(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const addProblem = async (description: string) => {
+    try {
+      await axios.post('/api/problems', { description });
+      fetchProblems();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Problem Submission</h1>
+      <SubmitProblem addProblem={addProblem} />
+      <h2>Problems</h2>
+      {problems.map(problem => (
+        <div key={problem.id}>
+          <h3>Problem {problem.id}</h3>
+          <p>{problem.description}</p>
+        </div>
+      ))}
     </div>
   );
-}
+};
 
 export default App;
