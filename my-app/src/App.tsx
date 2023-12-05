@@ -17,7 +17,9 @@ const App: React.FC = () => {
   const fetchProblems = async () => {
     try {
       const response = await axios.get('/api/problems');
+      console.log('Response data:', response.data); // Add this line
       setProblems(response.data);
+      console.log('Problems state:', problems); // Add this line
     } catch (err) {
       console.error(err);
     }

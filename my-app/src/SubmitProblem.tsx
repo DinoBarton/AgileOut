@@ -1,12 +1,9 @@
 import React, { useState, FormEvent } from 'react';
-
 interface Props {
     addProblem: (description: string) => Promise<void>;
 }
-
 const SubmitProblem: React.FC<Props> = ({ addProblem }) => {
     const [problem, setProblem] = useState('');
-
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
@@ -16,7 +13,6 @@ const SubmitProblem: React.FC<Props> = ({ addProblem }) => {
             console.error(err);
         }
     };
-
     return (
         <form onSubmit={handleSubmit}>
             <label>
@@ -27,5 +23,4 @@ const SubmitProblem: React.FC<Props> = ({ addProblem }) => {
         </form>
     );
 };
-
 export default SubmitProblem;
