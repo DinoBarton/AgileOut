@@ -1,0 +1,11 @@
+gem install rails
+
+rails new my_api --api
+
+cd my_api
+
+mkdir client
+
+cd client
+
+npx create-react-app . --template typescript
