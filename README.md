@@ -1,4 +1,4 @@
-# AgileOut
+<center># AgileOut</center>
 A platform that allows you to outsource problems to users best solution earns compensation 
 ### Problems
 Freelance platforms do not foster a consistent equal playing field for new users
